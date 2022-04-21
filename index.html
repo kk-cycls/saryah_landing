@@ -1,0 +1,195 @@
+<!doctype html>
+<html dir='rtl' lang="ar" data-theme="light" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#f3f4f6">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="styley.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+</head>
+<body> 
+    <div class="main sm:bg-gradient-to-bl bg-gradient-to-b  from-gray-100 via-grey-200 to-gray-400 w-screen min-h-screen flex justify-center items-center flex-nowrap ">
+      <div class=" sm:p-4 p-8 w-full h-full relative sm:mr-24">
+          <img src="../images/iphone.png" class="object-contain w-full h-[800px] invisible sm:visible"/>
+          <div class="inset-0 sm:pt-0 pt-12 sm:pl-24 absolute sm:h-[800px] h-full flex justify-center items-center ">
+            <div class="sm:w-[300px] sm:h-[600px] overflow-auto w-full h-full px-4 py-4 pb-32 sm:pb-4 flex flex-col space-y-4 " id="bot">
+              <!-- Bot Chat -->
+            </div>
+          </div>
+      </div>
+    </div>
+  
+  
+  <!--#3 Javascript Files-->
+  
+  <script>
+
+function delay(time) {return new Promise(resolve => setTimeout(resolve, time));}
+function userBox(t, id){ return `<div class="w-full  transition " id="${id}">
+                                    <div class="py-1 px-4 w-fit max-w-[75%] rounded-full shadow-lg  bg-slate-300 ">
+                                        <p class="break-normal text-sm text-gray-600 "> ${ t } </p></div></div>`}
+function botBox(t, id){ return `<div class="w-full grid justify-items-end  transition " id="${id}">
+                                    <div class="py-1 px-4 w-fit max-w-[75%] rounded-full shadow-lg  bg-slate-400 "> 
+                                        <p class="break-normal text-sm text-gray-100 "> ${ t } </p></div></div>`}
+
+var promise = new Promise(function(resolve, reject) {
+    resolve(1);
+  });
+
+function hourGlass(time = 1000, user=true){
+    return new Promise(async function(resolve, reject) {
+        const botDiv = document.getElementById("bot");
+        botDiv.innerHTML += user ? userBox("&#9203", "hq") : botBox("&#9203", "hg");
+        botDiv.scrollTop = botDiv.scrollHeight;
+        await delay(time);
+        botDiv.removeChild(document.getElementById("hg"));
+        await delay(250);
+        resolve(1);
+    })
+}
+
+function eyesButton(){
+    let waitForPressResolve;
+    function waitForPress() {return new Promise(resolve => waitForPressResolve = resolve)}
+    function btnResolver() {if (waitForPressResolve) waitForPressResolve()}
+    return new Promise(async function(resolve, reject) {
+        const botDiv = document.getElementById("bot");
+        await delay(400);
+        botDiv.innerHTML += `<div class="w-full" id="button">
+                                <div class="max-w-[75%] transition  ">  
+                                    <button id="btn" class="py-1 px-4 w-auto rounded-full shadow-lg  bg-orange-500 break-normal text-sm text-gray-100 transition hover:bg-slate-300 hover:text-gray-600 "> 👀 </button></div></div>`
+        const btn = document.getElementById("btn");
+        botDiv.scrollTop = botDiv.scrollHeight;
+        btn.addEventListener('click', btnResolver);
+        await waitForPress();
+        botDiv.removeChild(document.getElementById("button"));
+        resolve(1);
+    });
+}
+
+function addTextBox(t, wait=0, u=true, id="None"){
+    var scroll = true
+    return new Promise(async function(resolve, reject) {
+        if (wait > 0){
+            await hourGlass(wait, u);
+            scroll = false
+        }
+        const botDiv = document.getElementById("bot");
+        await delay(100);
+        botDiv.innerHTML += u ? userBox(t, id) : botBox(t, id);
+        botDiv.scrollTop = botDiv.scrollHeight;
+        await delay(500);
+        resolve(1);
+    });
+}
+
+
+  </script>
+  <script>
+    addTextBox(
+      "ياهلا والله 😍"  
+                    ,750, false).then(function(){
+      return addTextBox(
+        "حياك الله في سارية"
+                     ,0 ,false);
+    }).then(function(){
+      return eyesButton();
+    }).then(function(){
+      return addTextBox(
+        "هلا وغلا "
+        );
+    }).then(function(){
+      return addTextBox(
+        "أكيد تستخدم واتساب ؟!  😁"
+        ,600, false);
+    }).then(function(){
+      return eyesButton();
+    }).then(function(){
+      return addTextBox(
+        "ايه نعم استخدمه"
+         );
+    }).then(function(){
+      return addTextBox(
+        "تسولف مع اصحابك واهلك فيه ؟ 🤔"
+        ,600, false);
+    }).then(function(){
+      return eyesButton();
+    }).then(function(){
+      return addTextBox(
+        "😑"
+         );
+    }).then(function(){
+      return addTextBox(
+        "أكيد"
+         );
+    }).then(function(){
+      return addTextBox(
+        "حلو"
+        ,600, false);
+    }).then(function(){
+      return addTextBox(
+        "اغلبنا داخل السعودية نقضي كل امورنا بالواتساب"
+        ,1300, false);
+    }).then(function(){
+      return addTextBox(
+        "توافقني ؟"
+        ,600, false);
+    }).then(function(){
+      return eyesButton();
+    }).then(function(){
+      return addTextBox(
+        "🤔"
+        );
+    }).then(function(){
+      return addTextBox(
+        "صحيح"
+        );
+    }).then(function(){
+      return addTextBox(
+        `
+لكن اكيد عشان تخلص امورك تحتاج تكلم احد بالواتس ؟!
+        `
+        ,1200, false);
+    }).then(function(){
+      return eyesButton();
+    }).then(function(){
+      return addTextBox(
+        "أكيد، ماعندي جن يخدموني!"
+        );
+    }).then(function(){
+      return addTextBox(
+        `
+        😂
+        `
+        ,0, false);
+    }).then(function(){
+      return addTextBox(
+        `
+        رسالة سارية تخلص لك امورك من دون ماتكلم أحد 
+        `
+        , 0, false);
+    }).then(function(){
+      return addTextBox(
+        `
+        تابع حسابنا في
+        <a src="http://www.goggle.com"> <i class="fab fa-twitter"></i> </a> وانتظر جديدنا 
+                `
+        ,0, false);
+    })
+     
+
+  </script>
+</body>
+
+</html>
+
+<!-- 
+  .then(function(){
+      return addTextBox("", "4");
+    })
+-->
