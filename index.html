@@ -16,28 +16,12 @@
 </head>
 <body> 
     <div class="main sm:bg-gradient-to-bl bg-gradient-to-b  from-gray-100 via-grey-200 to-gray-400 w-screen min-h-screen flex justify-center items-center flex-nowrap ">
-      <div class=" sm:p-4 p-8 w-full h-full flex justify-center items-center">
-          <div class="sm:w-6/12 sm:h-10/12 w-full h-full relative sm:pr-[7%]">
-            <img src="iphone.png" class="static object-contain w-full h-full  invisible sm:visible"/>
-          
-             <div class="inset-0 sm:pt-[12%] sm:pb-[17%] pt-12 absolute sm:h-10/12 h-full w-full flex justify-center items-center ">
-              <div class="sm:w-[42.1%] sm:h-10/12  sm:pb-4 sm:mr-[0.5%] overflow-auto w-full h-full px-[2%] py-4 pb-32  flex flex-col space-y-4 sm:border-2 border-y-slate-200 border-x-transparent" id="bot">
+      <div class=" sm:p-4 p-8 w-full h-full relative sm:mr-24">
+        <img src="iphone.png" class="object-contain w-full h-[800px] 2xl:h-[1000px] invisible sm:visible"/>
+        <div class="inset-0 sm:pt-0 pt-12 sm:pl-24 absolute sm:h-[800px] 2xl:h-[1000px] h-full flex justify-center items-center ">
+          <div class="sm:w-[300px] sm:h-[600px] 2xl:w-[360px] 2xl:h-[750px] overflow-auto w-full h-full px-4 py-4 pb-32 sm:pb-4 flex flex-col space-y-4 " id="bot">
                 
-                <!--<div class="w-full grid justify-items-end transition " id="${id}">
-                  <div class="py-1 px-[1%] w-full  flex justify-end items-center"> 
-                      
-                    
-                      <p class="w-full text-left pl-[5%]"> 
-                        <a href="http://www.twitter.com" style="font-family: Ubuntu;" class="text-blue-500 underline"> saryah@ </a> 
-                      </p>
-                    
-
-                    <div class="bg-gray-100 rounded-lg shadow-lg border-[0.5px] border-gray-300 aspect-square  w-4/12 flex justify-center items-center p-[5%]">
-                      <img src="dear.png" class=" object-contain w-full"/>
-                    </div>
-                       
-                  </div>
-                </div> -->
+                
                 
                 <!-- Bot Chat -->
               </div>
@@ -54,10 +38,10 @@
 function delay(time) {return new Promise(resolve => setTimeout(resolve, time));}
 function userBox(t, id){ return `<div class="w-full  transition " id="${id}">
                                     <div class="py-1 px-4 w-fit max-w-[75%] rounded-full shadow-lg  bg-slate-300 ">
-                                        <p class="break-normal text-sm text-gray-600 "> ${ t } </p></div></div>`}
+                                        <p class="break-normal md:text-xs lg:text-sm 2xl:text-xl text-sm text-gray-600 "> ${ t } </p></div></div>`}
 function botBox(t, id){ return `<div class="w-full grid justify-items-end  transition " id="${id}">
                                     <div class="py-1 px-4 w-fit max-w-[75%] rounded-full shadow-lg  bg-slate-400 "> 
-                                        <p class="break-normal text-sm text-gray-100 "> ${ t } </p></div></div>`}
+                                        <p class="break-normal md:text-xs lg:text-sm 2xl:text-xl text-sm text-gray-100 "> ${ t } </p></div></div>`}
 
 var promise = new Promise(function(resolve, reject) {
     resolve(1);
@@ -112,7 +96,9 @@ function END(){
                     </div>
                        
                   </div>
-                </div>`
+                </div>
+                <div class="text-transparent"> E</div>
+                <div class="text-transparent"> E</div>`
         botDiv.scrollTop = botDiv.scrollHeight;
         resolve(1);
     });
