@@ -8,6 +8,7 @@
 
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="styley.css" rel="stylesheet" type="text/css" />
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>      
@@ -15,31 +16,32 @@
 
 </head>
 <body> 
-    <div class="main sm:bg-gradient-to-bl bg-gradient-to-b  from-gray-100 via-grey-200 to-gray-400 w-screen min-h-screen flex justify-center items-center flex-nowrap ">
+    <div class="main sm:bg-gradient-to-bl bg-gray-100 sm:from-gray-100 sm:via-grey-200 sm:to-gray-400 w-screen min-h-screen flex justify-center items-center flex-nowrap ">
       <div class=" sm:p-4 p-8 w-full h-full relative sm:mr-24">
-        <img src="iphone.png" class="object-contain w-full h-[800px] 2xl:h-[1000px] invisible sm:visible"/>
-        <div class="inset-0 sm:pt-0 pt-12 sm:pl-24 absolute sm:h-[800px] 2xl:h-[1000px] h-full flex justify-center items-center ">
-          <div class="sm:w-[300px] sm:h-[600px] 2xl:w-[360px] 2xl:h-[750px] overflow-auto w-full h-full px-4 py-4 pb-32 sm:pb-4 flex flex-col space-y-4 " id="bot">
-                
-                
-                
+        <img src="iphone.png" class="object-contain w-full h-[50px] sm:h-[800px] 2xl:h-[1000px] invisible sm:visible"/>
+        <div class="inset-0 sm:pt-0 pt-12 sm:pl-24 2xl:pl-32 absolute sm:h-[800px] 2xl:h-[1000px] h-full flex justify-center items-center scroll-smooth">
+          <div class="bot sm:w-[300px] sm:h-[600px] 2xl:w-[380px] 2xl:h-[750px] overflow-auto w-full h-full px-4 py-4 pb-32 sm:pb-4 flex flex-col space-y-4" id="bot">
+        
                 <!-- Bot Chat -->
-              </div>
-            </div>
           </div>
+        </div>
       </div>
     </div>
   
   
   <!--#3 Javascript Files-->
-  
+  <script src="zenscroll-latest/zenscroll-min.js"></script>
   <script>
 
+var myDiv = document.getElementById("bot")
+var myScroller = zenscroll.createScroller(myDiv, 500, 5)
+
+
 function delay(time) {return new Promise(resolve => setTimeout(resolve, time));}
-function userBox(t, id){ return `<div class="w-full  transition " id="${id}">
+function userBox(t, id){ return `<div class="w-full  transition" >
                                     <div class="py-1 px-4 w-fit max-w-[75%] rounded-full shadow-lg  bg-slate-300 ">
                                         <p class="break-normal md:text-xs lg:text-sm 2xl:text-xl text-sm text-gray-600 "> ${ t } </p></div></div>`}
-function botBox(t, id){ return `<div class="w-full grid justify-items-end  transition " id="${id}">
+function botBox(t, id){ return `<div class="w-full grid justify-items-end  transition ">
                                     <div class="py-1 px-4 w-fit max-w-[75%] rounded-full shadow-lg  bg-slate-400 "> 
                                         <p class="break-normal md:text-xs lg:text-sm 2xl:text-xl text-sm text-gray-100 "> ${ t } </p></div></div>`}
 
@@ -47,174 +49,200 @@ var promise = new Promise(function(resolve, reject) {
     resolve(1);
   });
 
-function hourGlass(time = 1000, user=true){
+function hourGlass(args){
+    args.time = args.time ?? 1000;
+    args.user = args.user ?? false 
+    
+
     return new Promise(async function(resolve, reject) {
         const botDiv = document.getElementById("bot");
-        botDiv.innerHTML += user ? userBox("&#9203", "hq") : botBox("&#9203", "hg");
-        botDiv.scrollTop = botDiv.scrollHeight;
-        await delay(time);
-        botDiv.removeChild(document.getElementById("hg"));
-        await delay(250);
-        resolve(1);
+        var div = document.createElement("div");
+        div.innerHTML += args.user ? userBox("&#9203") : botBox("&#9203");
+        botDiv.appendChild(div);
+        myScroller.intoView(div, 500);
+        await delay(args.time);
+        div.classList.add("transition-opacity", "opacity-0");
+        resolve(div);
+        await delay(150)
     })
 }
 
 function eyesButton(){
-    let waitForPressResolve;
-    function waitForPress() {return new Promise(resolve => waitForPressResolve = resolve)}
-    function btnResolver() {if (waitForPressResolve) waitForPressResolve()}
-    return new Promise(async function(resolve, reject) {
-        const botDiv = document.getElementById("bot");
-        await delay(400);
-        botDiv.innerHTML += `<div class="w-full" id="button">
-                                <div class="max-w-[75%] transition  ">  
-                                    <button id="btn" class="py-1 px-4 w-auto rounded-full shadow-lg  bg-orange-500 break-normal text-sm text-gray-100 transition hover:bg-slate-300 hover:text-gray-600 "> 👀 </button></div></div>`
-        const btn = document.getElementById("btn");
-        botDiv.scrollTop = botDiv.scrollHeight;
-        btn.addEventListener('click', btnResolver);
-        await waitForPress();
-        botDiv.removeChild(document.getElementById("button"));
-        resolve(1);
-    });
+    
+  let waitForPressResolve;
+  function waitForPress() {return new Promise(resolve => waitForPressResolve = resolve)}
+  function btnResolver() {if (waitForPressResolve) waitForPressResolve()}
+
+  return new Promise(async function(resolve, reject) {
+      var div = document.createElement("div");
+      div.innerHTML += `<div class="w-full">
+                              <div class="max-w-[75%] transition">  
+                                  <button id="btn" class="py-1 px-4 w-auto rounded-full shadow-lg  bg-orange-500 break-normal text-sm text-gray-100 transition hover:bg-slate-300 hover:text-gray-600 "> 👀 </button></div></div>`
+      await delay(400);
+      const botDiv = document.getElementById("bot");
+      botDiv.appendChild(div);
+      const btn = document.getElementById("btn");
+      myScroller.intoView(div, 500);
+      btn.addEventListener('click', btnResolver);
+      await waitForPress();
+      div.classList.add("transition-opacity", "opacity-0");
+      await delay(150);
+      resolve(div);
+  });
 }
 
 function END(){
     return new Promise(async function(resolve, reject) {
         const botDiv = document.getElementById("bot");
         await delay(400);
-        botDiv.innerHTML += `<div class="w-full grid justify-items-end transition " >
+        var div = document.createElement("div");
+        div.innerHTML += `<div class="w-full grid justify-items-end transition " >
                   <div class="py-1 px-[1%] w-full  flex justify-end items-center"> 
                       
                     
                       <p class="w-full text-left pl-[5%]"> 
-                        <a href="http://www.twitter.com" style="font-family: Ubuntu;" class="text-blue-500 underline"> saryah@ </a> 
+                        <a href="http://www.twitter.com" style="font-family: Ubuntu;" class="text-blue-500 underline  2xl:text-xl md:text-lg "> saryah@ </a> 
                       </p>
                     
 
-                    <div class="bg-gray-100 rounded-lg shadow-lg border-[0.5px] border-gray-300 aspect-square  w-4/12 flex justify-center items-center p-[5%]">
+                    <div class="bg-gray-100 rounded-lg shadow-inner shadow-lg border-[0.5px] border-gray-300 aspect-square  w-4/12 flex justify-center items-center p-[5%]">
                       <img src="dear.png" class=" object-contain w-full"/>
                     </div>
-                       
+                    <div class="w-3/12"></div>   
                   </div>
-                </div>
-                <div class="text-transparent"> E</div>
-                <div class="text-transparent"> E</div>`
-        botDiv.scrollTop = botDiv.scrollHeight;
+                </div>`
+        botDiv.appendChild(div)
+        myScroller.intoView(div, 500);
         resolve(1);
     });
 }
 
-function addTextBox(t, wait=0, u=true, id="None"){
-    var scroll = true
+function addTextBox(args){
+    args.wait = args.wait ?? 0
+    args.user = args.user ?? false 
+    
+    const botDiv = document.getElementById("bot");
+    var div = document.createElement("div")
+    div.innerHTML += args.user ? userBox(args.text) : botBox(args.text);
+    
     return new Promise(async function(resolve, reject) {
-        if (wait > 0){
-            await hourGlass(wait, u);
-            scroll = false
+        if (args.wait > 0){
+            hg = await hourGlass({wait: args.wait, user: args.user});
+            await delay(100);
+            botDiv.replaceChild(div, hg)
         }
-        const botDiv = document.getElementById("bot");
-        await delay(100);
-        botDiv.innerHTML += u ? userBox(t, id) : botBox(t, id);
-        botDiv.scrollTop = botDiv.scrollHeight;
+        if (args.eyes){
+          eyes = await eyesButton();
+          botDiv.replaceChild(div, eyes)
+
+        }else {
+          await delay(100);
+          botDiv.appendChild(div)
+          
+        }
+        
+        myScroller.intoView(div, 500);
         await delay(500);
-        resolve(1);
-    });
+        resolve(div);
+        });
 }
 
 
   </script>
   <script>
-    addTextBox(
-      "ياهلا والله 😍"  
-                    ,750, false).then(function(){
-      return addTextBox(
-        "حياك الله في سارية"
-                     ,0 ,false);
-    }).then(function(){
-      return eyesButton();
-    }).then(function(){
-      return addTextBox(
-        "هلا وغلا "
-        );
-    }).then(function(){
-      return addTextBox(
-        "أكيد تستخدم واتساب ؟!  😁"
-        ,600, false);
-    }).then(function(){
-      return eyesButton();
-    }).then(function(){
-      return addTextBox(
-        "ايه نعم استخدمه"
-         );
-    }).then(function(){
-      return addTextBox(
-        "تسولف مع اصحابك واهلك فيه ؟ 🤔"
-        ,600, false);
-    }).then(function(){
-      return eyesButton();
-    }).then(function(){
-      return addTextBox(
-        "😑"
-         );
-    }).then(function(){
-      return addTextBox(
-        "أكيد"
-         );
-    }).then(function(){
-      return addTextBox(
-        "حلو"
-        ,600, false);
-    }).then(function(){
-      return addTextBox(
-        "اغلبنا داخل السعودية نقضي كل امورنا بالواتساب"
-        ,1300, false);
-    }).then(function(){
-      return addTextBox(
-        "توافقني ؟"
-        ,600, false);
-    }).then(function(){
-      return eyesButton();
-    }).then(function(){
-      return addTextBox(
-        "🤔"
-        );
-    }).then(function(){
-      return addTextBox(
-        "صحيح"
-        );
-    }).then(function(){
-      return addTextBox(
-        `
-لكن اكيد عشان تخلص امورك تحتاج تكلم احد بالواتس ؟!
-        `
-        ,1200, false);
-    }).then(function(){
-      return eyesButton();
-    }).then(function(){
-      return addTextBox(
-        "أكيد، ماعندي جن يخدموني!"
-        );
-    }).then(function(){
-      return addTextBox(
-        `
-        😂
-        `
-        ,0, false);
-    }).then(function(){
-      return addTextBox(
-        `
-        رسالة سارية تخلص لك امورك من دون ماتكلم أحد 
-        `
-        , 0, false);
-    }).then(function(){
-      return addTextBox(
-        `
-قريبا على الآب ستور
-                `
-        ,0, false);
-    }).then(function(){
+    addTextBox({
+      text: "ياهلا والله 😍"
+    }).then(function(div){
+      return addTextBox({
+        text: "حياك الله في سارية",
+        last: div
+      })
+    }).then(function(div){
+      return addTextBox({
+        text: "هلا وغلا ",
+        user: true,
+        last: div,
+        eyes: true
+      });
+    }).then(function(div){
+      return addTextBox({
+        text: "أكيد تستخدم واتساب ؟!  😁",
+        wait: 600
+      });
+    }).then(function(div){
+      return addTextBox({
+        text: "ايه نعم استخدمه",
+        user: true,
+        last: div,
+        eyes:true
+      });
+    }).then(function(div){
+      return addTextBox({
+        text: "تسولف مع اصحابك واهلك فيه ؟ 🤔",
+        wait: 600      
+      });
+    }).then(function(div){
+      return addTextBox({
+        text: "😑",
+        user: true,
+        eyes: true
+      });
+    }).then(function(div){
+      return addTextBox({
+        text: "أكيد",
+        user: true
+      });
+    }).then(function(div){
+      return addTextBox({
+        text: "حلو",
+        wait: 600
+      });
+    }).then(function(div){
+      return addTextBox({
+        text: "اغلبنا داخل السعودية نقضي كل امورنا بالواتساب",
+        wait: 1300
+      });
+    }).then(function(div){
+      return addTextBox({
+        text: "توافقني ؟",
+        wait: 600
+      });
+    }).then(function(div){
+      return addTextBox({
+        text: "🤔",
+        user: true,
+        eyes: true
+      });
+    }).then(function(div){
+      return addTextBox({
+        text: "صحيح",
+        user: true
+      });
+    }).then(function(div){
+      return addTextBox({
+        text: `لكن اكيد عشان تخلص امورك تحتاج تكلم احد بالواتس ؟!`,
+        wait: 1200
+      });
+    }).then(function(div){
+      return addTextBox({
+        text: "أكيد، ماعندي جن يخدموني!",
+        user: true,
+        eyes: true
+      });
+    }).then(function(div){
+      return addTextBox({
+        text: `😂`
+      });
+    }).then(function(div){
+      return addTextBox({
+        text:  `رسالة سارية تخلص لك امورك من دون ماتكلم أحد `
+      });
+    }).then(function(div){
+      return addTextBox({
+        text: `قريبا على الآب ستور`
+      });
+    }).then(function(div){
       return END()
-    }, function(){
-      console.log("Error")
     });
      
 
