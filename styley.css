@@ -4,7 +4,7 @@ html,
 body {
     overscroll-behavior: none;
     font-family: "Almarai";
-    position: fixed;
+    position: relative;
     overflow: hidden;
 }
 body > .main {
@@ -13,3 +13,7 @@ body > .main {
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch; /* enables “momentum” (smooth) scrolling */
   }
+
+.bot::-webkit-scrollbar {
+display: none;
+}
