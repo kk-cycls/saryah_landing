@@ -3,13 +3,11 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#f3f4f6">
 
    <link href="dist/output.css" rel="stylesheet">
    <link href="styley.css" rel="stylesheet" type="text/css" /> 
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>      
@@ -151,26 +149,6 @@ function addTextBox(args){
 
   </script>
   <script>
-var attachMobileSafariAddressBarHelpTip = function (target) {
-var $target = $(target);
-$target.tooltip({
-    title: 'Scroll up to hide Safari address bar',
-    trigger: 'manual',
-    placement: 'bottom'
-});
-$(window).on('resize', function () {
-    var bodyHeight = document.body.offsetHeight;
-    var windowHeight = window.innerHeight;
-    var isLandscape = Math.abs(window.orientation) === 90;
-    var showTooltip = (windowHeight < bodyHeight);
-    if(!isLandscape) return;
-    $target.tooltip(showTooltip ? 'show' : 'hide');
-});
-}
-var ua = window.navigator.userAgent;
-if(ua.indexOf('iPhone') !== -1 && ua.indexOf('Safari') !== -1) {
-    attachMobileSafariAddressBarHelpTip('#main-nav');
-}
 
     addTextBox({
       text: "ياهلا والله 😍"
