@@ -150,8 +150,10 @@ function addTextBox(args){
   </script>
   <script>
 
-    addTextBox({
+    wait(500).then(function(){
+      return addTextBox({
       text: "ياهلا والله 😍"
+      })
     }).then(function(div){
       return addTextBox({
         text: "حياك الله في سارية",
