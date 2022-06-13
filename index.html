@@ -101,10 +101,10 @@ function logo(){
                           <!-- <div class="bg-gray-100 rounded-3xl sm:rounded-2xl shadow-xl shadow-inner  border-[0.5px] border-gray-300 aspect-square  w-3/12 flex justify-center items-center p-[5%]">
                             <img src="#" class=" object-contain w-full saturate-200 contrast-125" id="logo"/>
                           </div> -->
-                          <img src="logo.png"> 
+                          <img src="#" id="logo"> 
                         </div>`
       botDiv.appendChild(div)
-  return loadImage("dear.png", "logo").then(function(){
+  return loadImage("logo.png", "logo").then(function(){
     return new Promise(async function(resolve, reject) {
       myScroller.intoView(div, 500);
       div = document.getElementById("logo_div");
