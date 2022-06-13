@@ -163,11 +163,6 @@ function loadImage(src, id) {
         })
     }).then(function(div){
       return addTextBox({
-        text: "حياك الله في سارية",
-        last: div
-      })
-    }).then(function(div){
-      return addTextBox({
         text: "هلا وغلا ",
         user: true,
         last: div,
@@ -175,80 +170,52 @@ function loadImage(src, id) {
       });
     }).then(function(div){
       return addTextBox({
-        text: "أكيد تستخدم واتساب ؟!  😁",
+        text: "حياك الله في سارية",
+        wait: 300
+      });
+    }).then(function(div){
+      return addTextBox({
+        text: "تستخدم واتساب؟",
         wait: 600
       });
     }).then(function(div){
       return addTextBox({
-        text: "ايه نعم استخدمه",
+        text: "ايه اكيد استخدمه",
         user: true,
         last: div,
         eyes:true
       });
     }).then(function(div){
       return addTextBox({
-        text: "تسولف مع اصحابك واهلك فيه ؟ 🤔",
-        wait: 600      
-      });
-    }).then(function(div){
-      return addTextBox({
-        text: "😑",
+        text: "🙃",
         user: true,
-        eyes: true
+        last: div
       });
     }).then(function(div){
       return addTextBox({
-        text: "أكيد",
-        user: true
-      });
-    }).then(function(div){
-      return addTextBox({
-        text: "حلو",
-        wait: 600
-      });
-    }).then(function(div){
-      return addTextBox({
-        text: "اغلبنا داخل السعودية نقضي كل امورنا بالواتساب",
+        text: "وتقضّي أشغالك فيه ؟  ",
         wait: 1300
       });
     }).then(function(div){
       return addTextBox({
-        text: "توافقني ؟",
-        wait: 600
-      });
-    }).then(function(div){
-      return addTextBox({
-        text: "🤔",
+        text: "ايه",
         user: true,
         eyes: true
       });
     }).then(function(div){
       return addTextBox({
-        text: "صحيح",
-        user: true
-      });
-    }).then(function(div){
-      return addTextBox({
-        text: `لكن اكيد عشان تخلص امورك تحتاج تكلم احد بالواتس ؟!`,
-        wait: 1200
-      });
-    }).then(function(div){
-      return addTextBox({
-        text: "أكيد، ماعندي جن يخدموني!",
+        text: "بس موب كلها",
         user: true,
-        eyes: true
+        wait:450
       });
     }).then(function(div){
       return addTextBox({
-        text: `😂`
+        text: "صحيح، لأنك تضطر تكلم أحد ثاني ",
+        wait: 700
       });
     }).then(function(div){
       return addTextBox({
-        text:  `رسالة سارية تخلص لك امورك من دون ماتكلم أحد `
-      });
-    }).then(function(div){
-      return addTextBox({
-        text: `قريبا على الآب ستور`
+        text:  `قريب، كل اللي تحتاجه رسالة لسارية`
       });
     }).then(function(div){
       return logo()
@@ -257,7 +224,7 @@ function loadImage(src, id) {
       return addTextBox({
         text: `
         تقدر تتابعنا على 
-        <a href='#' class='text-blue-500 underline'> تويتر </a>`
+        <a href='https://twitter.com/Saryah_KSA' class='text-blue-500 underline'> تويتر </a>`
       })
     });
   </script>
