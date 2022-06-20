@@ -3,7 +3,7 @@
 
 <head>
   <title>سـاريـة</title>
-  <link rel="icon" href="logo.png">  
+  <link rel="icon" href="small_logo.png">  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#f3f4f6">
@@ -37,7 +37,14 @@
 var myDiv = document.getElementById("bot")
 var myScroller = zenscroll.createScroller(myDiv, 500, 5)
 
-
+function loadImage(src, id) {
+  return new Promise((resolve, reject) => {
+    const img = document.getElementById(id);
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = src;
+  })  
+}
 function delay(time) {return new Promise(resolve => setTimeout(resolve, time));}
 function userBox(t, id){ return `<div class="w-full  transition" >
                                     <div class="py-2 px-4 2xl:px-6 w-fit max-w-[75%] rounded-full shadow-lg  bg-slate-500 ">
@@ -78,7 +85,7 @@ function eyesButton(){
       var div = document.createElement("div");
       div.innerHTML += `<div class="w-full">
                               <div class="max-w-[75%] transition">  
-                                  <button id="btn" class="py-2 px-6 w-auto rounded-full shadow-lg  bg-[#913EB5] break-normal text-xl text-gray-100 transition hover:bg-slate-600 "> 👀 </button></div></div>`
+                                  <button id="btn" class="py-2 px-6 w-auto rounded-full shadow-lg  bg-[#741470] break-normal text-xl text-gray-100 transition hover:bg-slate-600 "> 👀 </button></div></div>`
       await delay(400);
       const botDiv = document.getElementById("bot");
       botDiv.appendChild(div);
@@ -98,10 +105,9 @@ function logo(){
   div.classList.add("opacity-0", "py-6")
       div.id = "logo_div"
       div.innerHTML += `<div class="py-1 px-[1%] w-full  flex justify-center items-center inv"> 
-                          <!-- <div class="bg-gray-100 rounded-3xl sm:rounded-2xl shadow-xl shadow-inner  border-[0.5px] border-gray-300 aspect-square  w-3/12 flex justify-center items-center p-[5%]">
-                            <img src="#" class=" object-contain w-full saturate-200 contrast-125" id="logo"/>
-                          </div> -->
-                          <img src="#" id="logo" class=" object-contain w-full"> 
+                           <div class="bg-gray-100 rounded-3xl sm:rounded-2xl shadow-xl shadow-inner  border-[0.5px] border-gray-300 aspect-square  w-3/12 flex justify-center items-center p-[5%]">
+                            <img src="#" class=" object-contain w-full" id="logo"/>
+                          </div> 
                         </div>`
       botDiv.appendChild(div)
   return loadImage("logo.png", "logo").then(function(){
@@ -145,14 +151,7 @@ function addTextBox(args){
         });
 }
 
-function loadImage(src, id) {
-  return new Promise((resolve, reject) => {
-    const img = document.getElementById(id);
-    img.onload = () => resolve(img);
-    img.onerror = reject;
-    img.src = src;
-  })  
-}
+
    
 
   </script>
