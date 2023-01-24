@@ -1,0 +1,240 @@
+<!doctype html>
+<html dir='rtl' lang="ar">
+
+<head>
+  <title>سـاريـة</title>
+  <link rel="icon" href="small_logo.png">  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#f3f4f6">
+
+   <link href="dist/output.css" rel="stylesheet">
+   <link href="styley.css" rel="stylesheet" type="text/css" /> 
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>      
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@1,300&display=swap" rel="stylesheet">
+
+</head>
+<body> 
+    <div class="main sm:bg-gradient-to-bl bg-gray-100 sm:from-gray-100 sm:via-grey-200 sm:to-gray-400 w-screen min-h-screen flex justify-center items-center flex-nowrap ">
+      <div class=" sm:p-4 p-8 w-full h-full relative sm:mr-24">
+        <img src="#" id="iphoneMockUp" decoding="sync" class="object-contain w-full h-[50px] sm:h-[800px] 2xl:h-[1000px] invisible sm:visible"/>
+        <div class="inset-0 sm:pt-0 pt-0 sm:pl-24 2xl:pl-32 absolute sm:h-[800px] 2xl:h-[1000px] h-full flex justify-center items-center scroll-smooth">
+          <div class="bot sm:w-[300px] sm:h-[600px] 2xl:w-[380px] 2xl:h-[750px] overflow-auto w-full h-full px-4 py-4 pb-32 sm:pb-4 flex flex-col space-y-4" id="bot">
+                 
+                <!-- Bot Chat -->
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  
+  <!--#3 Javascript Files-->
+  <script src="zenscroll-latest/zenscroll-min.js"></script>
+  <script>
+
+var myDiv = document.getElementById("bot")
+var myScroller = zenscroll.createScroller(myDiv, 500, 5)
+
+function loadImage(src, id) {
+  return new Promise((resolve, reject) => {
+    const img = document.getElementById(id);
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = src;
+  })  
+}
+function delay(time) {return new Promise(resolve => setTimeout(resolve, time));}
+function userBox(t, id){ return `<div class="w-full  transition" >
+                                    <div class="py-2 px-4 2xl:px-6 w-fit max-w-[75%] rounded-full shadow-lg  bg-slate-500 ">
+                                        <p class="break-normal md:text-xs lg:text-sm 2xl:text-xl text-sm text-gray-100 "> ${ t } </p></div></div>`}
+function botBox(t, id){ return `<div class="w-full grid justify-items-end  transition ">
+                                    <div class="py-2 px-4 2xl:px-6 w-fit max-w-[75%] rounded-full shadow-lg  bg-slate-300 "> 
+                                        <p class="break-normal md:text-xs lg:text-sm 2xl:text-xl text-sm text-gray-600 "> ${ t } </p></div></div>`}
+
+var promise = new Promise(function(resolve, reject) {
+    resolve(1);
+  });
+
+function hourGlass(args){
+    args.time = args.time ?? 1000;
+    args.user = args.user ?? false 
+    
+
+    return new Promise(async function(resolve, reject) {
+        const botDiv = document.getElementById("bot");
+        var div = document.createElement("div");
+        div.innerHTML += args.user ? userBox("&#9203") : botBox("&#9203");
+        botDiv.appendChild(div);
+        myScroller.intoView(div, 500);
+        await delay(args.time);
+        div.classList.add("transition-opacity", "opacity-0");
+        resolve(div);
+        await delay(150)
+    })
+}
+
+function eyesButton(){
+    
+  let waitForPressResolve;
+  function waitForPress() {return new Promise(resolve => waitForPressResolve = resolve)}
+  function btnResolver() {if (waitForPressResolve) waitForPressResolve()}
+
+  return new Promise(async function(resolve, reject) {
+      var div = document.createElement("div");
+      div.innerHTML += `<div class="w-full">
+                              <div class="max-w-[75%] transition">  
+                                  <button id="btn" class="py-2 px-6 w-auto rounded-full shadow-lg  bg-[#741470] break-normal text-xl text-gray-100 transition hover:bg-slate-600 "> 👀 </button></div></div>`
+      await delay(400);
+      const botDiv = document.getElementById("bot");
+      botDiv.appendChild(div);
+      const btn = document.getElementById("btn");
+      myScroller.intoView(div, 500);
+      btn.addEventListener('click', btnResolver);
+      await waitForPress();
+      div.classList.add("transition-opacity", "opacity-0");
+      await delay(150);
+      resolve(div);
+  });
+}
+
+function logo(){
+  const botDiv = document.getElementById("bot");
+  var div = document.createElement("div");
+  div.classList.add("opacity-0", "py-6")
+      div.id = "logo_div"
+      div.innerHTML += `<div class="py-1 px-[1%] w-full  flex justify-center items-center inv"> 
+                           <div class="bg-white rounded-3xl sm:rounded-2xl shadow-xl  border-[0.5px] border-gray-300 aspect-square  w-5/12 flex justify-center items-center p-[5%]">
+                            <img src="#" class=" object-contain w-9/12" id="logo"/>
+                          </div> 
+                        </div>`
+      botDiv.appendChild(div)
+  return loadImage("logo.png", "logo").then(function(){
+    return new Promise(async function(resolve, reject) {
+      myScroller.intoView(div, 500);
+      div = document.getElementById("logo_div");
+      div.classList.remove("opacity-0");
+      div.classList.add("transition-opacity", "opacity-100");
+      resolve(1);
+    })  
+  })
+}
+
+function addTextBox(args){
+    args.wait = args.wait ?? 0
+    args.user = args.user ?? false 
+    
+    const botDiv = document.getElementById("bot");
+    var div = document.createElement("div")
+    div.innerHTML += args.user ? userBox(args.text) : botBox(args.text);
+    
+    return new Promise(async function(resolve, reject) {
+        if (args.wait > 0){
+            hg = await hourGlass({wait: args.wait, user: args.user});
+            await delay(100);
+            botDiv.replaceChild(div, hg)
+        }
+        if (args.eyes){
+          eyes = await eyesButton();
+          botDiv.replaceChild(div, eyes)
+
+        }else {
+          await delay(100);
+          botDiv.appendChild(div)
+          
+        }
+        
+        myScroller.intoView(div, 500);
+        await delay(500);
+        resolve(div);
+        });
+}
+
+
+   
+
+  </script>
+  <script>
+
+    loadImage("iphone.png", "iphoneMockUp").then(function(){
+      return addTextBox({
+        text: "ياهلا والله 😍"
+        })
+    }).then(function(div){
+      return addTextBox({
+        text: "هلا وغلا ",
+        user: true,
+        last: div,
+        eyes: true
+      });
+    }).then(function(div){
+      return addTextBox({
+        text: "حياك الله في سارية",
+        wait: 300
+      });
+    }).then(function(div){
+      return addTextBox({
+        text: "تستخدم واتساب؟",
+        wait: 600
+      });
+    }).then(function(div){
+      return addTextBox({
+        text: "ايه اكيد استخدمه",
+        user: true,
+        last: div,
+        eyes:true
+      });
+    }).then(function(div){
+      return addTextBox({
+        text: "🙃",
+        user: true,
+        last: div
+      });
+    }).then(function(div){
+      return addTextBox({
+        text: "وتقضّي أشغالك فيه ؟  ",
+        wait: 1300
+      });
+    }).then(function(div){
+      return addTextBox({
+        text: "ايه",
+        user: true,
+        eyes: true
+      });
+    }).then(function(div){
+      return addTextBox({
+        text: "بس موب كلها",
+        user: true,
+        wait:450
+      });
+    }).then(function(div){
+      return addTextBox({
+        text: "صحيح، لأنك تضطر تكلم أحد ثاني ",
+        wait: 700
+      });
+    }).then(function(div){
+      return addTextBox({
+        text:  `قريب، كل اللي تحتاجه رسالة لسارية`
+      });
+    }).then(function(div){
+      return logo()
+    }).then(async function(){
+      await delay(400)
+      return addTextBox({
+        text: `
+        جرب سارية من خلال الانضمام للفترة التجريبة من 
+        <a href='https://testflight.apple.com/join/Z9sprOnh' class='text-blue-500 underline'> خلال هذا الرابط </a>`
+      })
+    }).then(async function(){
+      await delay(400)
+      return addTextBox({
+        text: `
+        تقدر تتابعنا على 
+        <a href='https://twitter.com/Saryah_App' class='text-blue-500 underline'> تويتر </a>`
+      })
+    });
+  </script>
+  
+</body>
+</html>
