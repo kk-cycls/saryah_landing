@@ -952,6 +952,11 @@ video {
   padding-right: 1%;
 }
 
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
 .pt-8 {
   padding-top: 2rem;
 }
@@ -1258,6 +1263,10 @@ video {
     margin-right: 6rem;
   }
 
+  .sm\:-mt-40 {
+    margin-top: -10rem;
+  }
+
   .sm\:h-\[800px\] {
     height: 800px;
   }
@@ -1295,6 +1304,11 @@ video {
   .sm\:px-6 {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
+  }
+
+  .sm\:px-0 {
+    padding-left: 0px;
+    padding-right: 0px;
   }
 
   .sm\:pt-0 {
